@@ -48,8 +48,11 @@ CREATE TABLE Project (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT,
+<<<<<<< HEAD
     -- داخل كود إنشاء جدول Project
     deadline DATE  ,
+=======
+>>>>>>> 4714cbdfee180b74a94d55829da92efb105534b6
     manager_id INT NOT NULL,
     FOREIGN KEY (manager_id) REFERENCES Manager (userId) ON DELETE CASCADE
 );
@@ -59,13 +62,18 @@ CREATE TABLE Tasks (
     title VARCHAR(100) NOT NULL,
     startDate DATE NOT NULL,
     endDate DATE NOT NULL,
+<<<<<<< HEAD
     status VARCHAR(50) NOT NULL DEFAULT 'To Do',
+=======
+    status VARCHAR(50) NOT NULL,
+>>>>>>> 4714cbdfee180b74a94d55829da92efb105534b6
     comment TEXT,
     project_id INT NOT NULL,
     employee_id INT, -- NULL si la tâche n'est pas encore attribuée
     FOREIGN KEY (project_id) REFERENCES Project (id) ON DELETE CASCADE,
     FOREIGN KEY (employee_id) REFERENCES Employee (userId) ON DELETE SET NULL
 );
+<<<<<<< HEAD
 CREATE TABLE task_history (
     id INT AUTO_INCREMENT PRIMARY KEY,
     task_id INT,
@@ -75,18 +83,44 @@ CREATE TABLE task_history (
     CONSTRAINT fk_task_history_tasks 
         FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 );
+=======
+>>>>>>> 4714cbdfee180b74a94d55829da92efb105534b6
 
 CREATE TABLE Meeting (
     meetingId INT AUTO_INCREMENT PRIMARY KEY,
     date DATE NOT NULL,
     time TIME NOT NULL,
     title VARCHAR(200) NOT NULL,
+<<<<<<< HEAD
     room VARCHAR(50) NOT NULL,
     resume TEXT,
+=======
+    room VARCHAR(50) DEFAULT NULL,
+    virtual_link VARCHAR(255) DEFAULT NULL,
+    resume TEXT,
+    status ENUM(
+        'Scheduled',
+        'Cancelled',
+        'Completed'
+    ) DEFAULT 'Scheduled',
+    isArchived BOOLEAN DEFAULT FALSE, -- العمود الجديد 
+    isNotified BOOLEAN DEFAULT FALSE,
+>>>>>>> 4714cbdfee180b74a94d55829da92efb105534b6
     manager_id INT NOT NULL,
     FOREIGN KEY (manager_id) REFERENCES Manager (userId) ON DELETE CASCADE
 );
 
+<<<<<<< HEAD
+=======
+CREATE TABLE MeetingMembers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    meeting_id INT,
+    userId INT,
+    FOREIGN KEY (meeting_id) REFERENCES Meeting (meetingId) ON DELETE CASCADE,
+    FOREIGN KEY (userId) REFERENCES User (id) ON DELETE CASCADE
+);
+
+>>>>>>> 4714cbdfee180b74a94d55829da92efb105534b6
 CREATE TABLE Chat (
     id INT AUTO_INCREMENT PRIMARY KEY,
     content TEXT NOT NULL,
@@ -126,6 +160,7 @@ CREATE TABLE PasswordReset (
     token VARCHAR(255) NOT NULL,
     expiresAt DATETIME NOT NULL,
     FOREIGN KEY (userId) REFERENCES User (id) ON DELETE CASCADE
+<<<<<<< HEAD
 );
 CREATE TABLE task_assignments (
     task_id INT,
@@ -152,3 +187,6 @@ ALTER TABLE tasks ADD COLUMN is_archived BOOLEAN DEFAULT FALSE;
 DROP TABLE task_history;
 ALTER TABLE project 
 MODIFY COLUMN status ENUM('Pending', 'In Progress', 'Completed', 'Canceled') DEFAULT 'Pending';
+=======
+);
+>>>>>>> 4714cbdfee180b74a94d55829da92efb105534b6
